@@ -2,6 +2,8 @@
   "name": "rails-mister-cocktail",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5"
+    "@rails/webpacker": "3.5",
+    "bootstrap": "3",
+    "jquery": "^3.3.1"
   }
 }
