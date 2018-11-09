@@ -2,9 +2,11 @@
 <div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
+      <%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill %>
       <%= link_to "Add Dose", new_cocktail_dose_path(@cocktail), class: "btn btn-success" %>
       <% @cocktail.doses.each do |dose| %>
-        <%= link_to "Doses", new_cocktail_dose_path(@cocktail), class: "btn btn-success" %>
+      <p><%= dose.ingredient.name %></p>
+      <p><%= dose.description %></p>
         <%= link_to "Delete Dose", dose_path(dose), class: "btn btn-success",  method: :delete,
             data: { confirm: "Are you sure?" } %>
       <% end %>
