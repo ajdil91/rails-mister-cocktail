@@ -64,3 +64,7 @@ gem 'font-awesome-sass', '~> 5.0.9'
 gem 'simple_form'
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'cloudinary'
+
+gem 'rest-client', '~> 1.8.0', '>= 2.0.2'
