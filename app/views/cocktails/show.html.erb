@@ -1,18 +1,44 @@
-<h1 class="text-center"><%= @cocktail.name %></h1>
+<div class="banner-sm" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path @cocktail.photo, height: 300, width: 400, crop: :fill %>">
+  <div class="banner-content">
+    <h1 class="text-center"><%= @cocktail.name %></h1>
+  </div>
+</div>
 <div class="container">
-  <div class="row text-center">
-    <div class="col-xs-12">
-      <%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill %>
-      <%= link_to "Add Dose", new_cocktail_dose_path(@cocktail), class: "btn btn-success" %>
-      <% @cocktail.doses.each do |dose| %>
-      <p><%= dose.ingredient.name %></p>
-      <p><%= dose.description %></p>
-        <%= link_to "Delete Dose", dose_path(dose), class: "btn btn-success",  method: :delete,
-            data: { confirm: "Are you sure?" } %>
-      <% end %>
+  <div class="row">
+    <div class="body">
+      <div class="text-center col-xs-12 col-md-6">
+        <%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill, class: "photo" %>
+      </div>
+      <div class="ingredients col-xs-12 col-md-6">
+        <h3 class="text-center">Ingredients</h3>
+        <% @cocktail.doses.each do |dose| %>
+          <div class="row">
+            <div class="col-xs-8">
+              <div class="row">
+                <div class="text-right col-xs-7">
+                  <p><%= dose.ingredient.name %></p>
+                </div>
+                <div class="row">
+                  <div class="dose col-xs-5">
+                    <p><%= dose.description %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-right col-xs-4">
+              <%= link_to "", dose_path(dose), class: "far fa-trash-alt", method: :delete, data: { confirm: "Are you sure?" } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
     </div>
   </div>
 </div>
+<div class="text-center new-in">
+  <%= link_to "Add Ingredient", new_cocktail_dose_path(@cocktail), class: "btn btn-success" %>
+</div>
+
 
 
 
