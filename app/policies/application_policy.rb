@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    true
+    false
   end
 
   def new?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    true
+    false
   end
 
   class Scope
