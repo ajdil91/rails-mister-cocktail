@@ -1,0 +1,10 @@
+<%= form_tag cocktails_path, method: :get do %>
+  <ul class="list-inline">
+    <li><%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a cocktail"
+  %></li>
+    <li><%= submit_tag "Search", class: "btn btn-success" %></li>
+  </ul>
+<% end %>

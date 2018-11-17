@@ -1,5 +1,6 @@
 <%= render "shared/banner" %>
 <div class="container">
+  <h1 class="text-center">Cocktails</h1>
   <div class="row">
       <% @cocktails.each do |cocktail| %>
         <%= link_to cocktail_path(cocktail) do  %>

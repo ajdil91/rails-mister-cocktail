@@ -1,10 +1,16 @@
 class CocktailsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @cocktails = Cocktail.all
+    if params[:query].present?
+      @cocktails = Cocktail.where("name ILIKE ?", "%#{params[:query]}%")
+    else
+      @cocktails = Cocktail.all
+    end
   end
 
   def show
     @cocktail = Cocktail.find(params[:id])
+    @review = Review.new
   end
 
   def new
@@ -18,6 +24,12 @@ class CocktailsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @cocktail = Cocktail.find(params[:id])
+    @cocktail.destroy
+    redirect_to cocktails_path
   end
 
   private

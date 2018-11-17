@@ -4,6 +4,11 @@
     <img src="http://www.iconarchive.com/download/i41420/cedarseed/cocktails/Negroni.ico" alt="logo"></a>
 
   <!-- Right Navigation -->
-  <%= link_to "Create Cocktail", new_cocktail_path, class: "btn btn-success" %>
-
+  <div "navbar-right">
+    <ul class="list-inline">
+      <li><%= render "shared/search_bar" %></li>
+      <li><%= link_to "Login", new_user_session_path, class: "btn btn-success" %></li>
+      <li><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success" %></li>
+    </ul>
+  </div>
 </div>

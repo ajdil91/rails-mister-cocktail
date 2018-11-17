@@ -39,30 +39,29 @@
   <div class="row text-center">
     <div class="col-xs-12">
       <%= link_to "Add Ingredient", new_cocktail_dose_path(@cocktail), class: "btn btn-success" %>
+      <%= link_to "Remove Cocktail", cocktail_path(@cocktail), class: "btn btn-success", method: :delete, data: {confirm: "Are you sure?"} %>
       <%= link_to "Back to Cocktails", cocktails_path, class: "btn btn-success" %>
     </div>
   </div>
 </div>
 <h1 class="text-center">Leave a Review</h1>
 <div class="container">
-  <div class="row text-center">
-    <div class="col-xs-12">
-      <%= link_to "Add Review", new_cocktail_review_path(@cocktail), class: "btn btn-success" %>
-      <h3 class="text-center">Reviews</h3>
-      <% @cocktail.reviews.each do |review| %>
-        <div class="row">
-          <div class="col-xs-12">
+  <div class="row">
+    <div class="create-review col-xs-12 col-md-5">
+      <%= render "reviews/new" %>
+    </div>
+      <div class="reviews text-left col-xs-12 col-md-7">
+        <h3>Reviews</h3>
+          <% @cocktail.reviews.each do |review| %>
+          <div class="review-card">
             <% review.rating.times do %>
               <span class="fas fa-star"></span>
             <% end %>
-          </div>
+            <p><%= review.content %></p>
+          <% end %>
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <%= review.content %>
-          </div>
-        </div>
-      <% end %>
+      </div>
+    </div>
   </div>
 </div>
 

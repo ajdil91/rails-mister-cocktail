@@ -1,0 +1,8 @@
+<h3 class="text-center">Add Review</h3>
+  <%= simple_form_for [@cocktail, @review] do |f| %>
+    <%= f.input :rating, collection: Review::RATINGS, prompt: "Select number of stars" %>
+    <%= f.input :content, placeholder: "Write your review" %>
+    <%= f.submit "Add Review", class: "btn btn-success" %>
+  <% end %>
+
+
