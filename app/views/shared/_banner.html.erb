@@ -2,8 +2,6 @@
   <div class="banner-content">
     <h1>Mister Cocktail</h1>
     <p>Bottoms Up</p>
-    <% if policy(Cocktail).create? %>
-      <%= link_to "Mix now", new_cocktail_path, class: "btn btn-success btn-lg"%>
-    <% end %>
+    <%= link_to "Mix now", new_cocktail_path, class: "btn btn-success btn-lg"%>
   </div>
 </div>

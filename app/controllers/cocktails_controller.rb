@@ -1,5 +1,5 @@
 class CocktailsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index]
   def index
     @cocktails = policy_scope(Cocktail).order(created_at: :desc)
     if params[:query].present?
@@ -11,6 +11,7 @@ class CocktailsController < ApplicationController
 
   def show
     @cocktail = Cocktail.find(params[:id])
+    authorize @cocktail
     @review = Review.new
   end
 
@@ -21,6 +22,7 @@ class CocktailsController < ApplicationController
 
   def create
     @cocktail = Cocktail.new(cocktail_params)
+    @cocktail.user = current_user
     authorize @cocktail
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
