@@ -5,6 +5,10 @@ class CocktailPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def create?
     true
   end

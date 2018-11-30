@@ -10,12 +10,12 @@ class CocktailsController < ApplicationController
   end
 
   def show
+    @cocktail = Cocktail.find(params[:id])
+
     if current_user.id == @cocktail.user_id
-      @cocktail = Cocktail.find(params[:id])
       authorize @cocktail
       @review = Review.new
     else
-      @cocktail = Cocktail.find(params[:id])
       @review = Review.new
     end
   end
