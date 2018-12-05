@@ -1,5 +1,5 @@
 class CocktailsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @cocktails = policy_scope(Cocktail).order(created_at: :desc)
     if params[:query].present?
@@ -11,13 +11,7 @@ class CocktailsController < ApplicationController
 
   def show
     @cocktail = Cocktail.find(params[:id])
-
-    if current_user.id == @cocktail.user_id
-      authorize @cocktail
-      @review = Review.new
-    else
-      @review = Review.new
-    end
+    @review = Review.new
   end
 
   def new
