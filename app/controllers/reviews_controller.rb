@@ -1,16 +1,21 @@
 class ReviewsController < ApplicationController
+  skip_before_action :authenticate_user!
+  skip_after_action :verify_authorized
+
   def new
     @cocktail = Cocktail.find(params[:cocktail_id])
     @review = Review.new
   end
 
   def create
+    @cocktail = Cocktail.find(params[:cocktail_id])
     @review = Review.new(review_params)
-    @review.cocktail = Cocktail.find(params[:cocktail_id])
-    if @review.save
+    @review.cocktail = @cocktail
+    if @review.save!
       redirect_to cocktail_path(@review.cocktail)
     else
-      render cocktail_path(@review.cocktail)
+      flash[:notice] = "Unable to save"
+      render "cocktails/show"
     end
   end
 
