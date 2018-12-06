@@ -1,6 +1,6 @@
 class Review < ApplicationRecord
   belongs_to :cocktail
-  belongs_to :user
+  belongs_to :user, optional: true
 
   # RATINGS = ["★", "★★", "★★★", "★★★★", "★★★★★"]
   RATINGS = [1, 2, 3, 4, 5]
