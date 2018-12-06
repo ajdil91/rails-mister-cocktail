@@ -12,10 +12,16 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.cocktail = @cocktail
     if @review.save!
-      redirect_to cocktail_path(@review.cocktail)
+      respond_to do |format|
+        format.html { redirect_to cocktail_path(@review.cocktail) }
+        format.js
+      end
     else
       flash[:notice] = "Unable to save"
-      render "cocktails/show"
+      respond_to do |format|
+        format.html { render "cocktails/show" }
+        format.js
+      end
     end
   end
 

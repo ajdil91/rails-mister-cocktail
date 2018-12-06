@@ -1,0 +1,20 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementByID('new_review');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+function addReview(reviewHTML) {
+  const reviews = document.getElementByID('reviews');
+  reviews.insertAdjeacentHTML('beforeend', reviewHTML);
+}
+
+console.log("hi");
+
+<% if @review.errors.any? %>
+  console.log("true");
+  refreshForm('<%= j render "reviews/new" %>');
+<% else %>
+console.log("false");
+  addReview('<%= j render "cocktails/show" %>');
+  refreshForm('<%= j render "reviews/new" %>');
+<% end %>
