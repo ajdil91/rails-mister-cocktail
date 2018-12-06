@@ -58,12 +58,16 @@
     </div>
       <div class="reviews text-left col-xs-12 col-md-7">
         <h3>Reviews</h3>
-          <% @cocktail.reviews.each do |review| %>
-          <div class="review-card">
-            <% review.rating.times do %>
-              <span class="fas fa-star"></span>
+          <% if @cocktail.reviews.blank? %>
+            <h6>Be the first to leave a review!</h6>
+          <% else %>
+            <% @cocktail.reviews.each do |review| %>
+            <div class="review-card" id="reviews">
+              <% review.rating.times do %>
+                <span class="fas fa-star"></span>
+              <% end %>
+              <p><%= review.content %></p>
             <% end %>
-            <p><%= review.content %></p>
           <% end %>
         </div>
       </div>
