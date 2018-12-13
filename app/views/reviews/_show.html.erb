@@ -1,0 +1,8 @@
+<% @cocktail.reviews.each do |review| %>
+  <div class="review-card">
+    <% review.rating.times do %>
+      <span class="fas fa-star"></span>
+    <% end %>
+    <p><%= review.content %></p>
+  </div>
+<% end %>
