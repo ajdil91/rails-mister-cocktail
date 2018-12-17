@@ -74,3 +74,6 @@ gem 'carrierwave', '~> 1.2'
 # Authorization and Authentication
 gem 'devise'
 gem "pundit"
+
+# URI normalizer
+gem 'addressable'

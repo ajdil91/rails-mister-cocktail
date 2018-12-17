@@ -1,5 +1,5 @@
-require 'open-uri'
 require 'json'
+require 'rest-client'
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
@@ -25,17 +25,15 @@ Ingredient.destroy_all
 
 # Seeding cocktails
 puts "=========Saving Cocktails=========="
-url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink'
-drinks_serialized = open(url).read
-drinks = JSON.parse(drinks_serialized)['drinks']
+response = RestClient.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink')
+drinks = JSON.parse(response.body)['drinks']
 
-drinks.first(10).each do |drink_id|
-  url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=#{drink_id}'
-  encoded_url = URI.encode(url)
-  drinks_serialized = open(encoded_url).read
-  drinks = JSON.parse(drinks_serialized)
+drinks.first(10).each do |drink|
+  id = drink['idDrink'].to_i
+  response = RestClient.get("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=#{id}")
+  drinks = JSON.parse(response)
 
-  Cocktail.create(name: drinks[:strDrink], description: drinks[:strIBA], photo: drinks[:strDrinkThumb])
+  Cocktail.create(name: drinks['strDrink'], description: drinks['strIBA'], photo: drinks['strDrinkThumb'])
 end
 
 # Seeding Ingredients
