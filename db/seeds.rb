@@ -23,17 +23,27 @@ puts "=========Destroying Old Cocktails and Ingredients==========="
 Cocktail.destroy_all
 Ingredient.destroy_all
 
+# Seeding users
+puts "=========Creating Users========"
+  User.create(
+    username: "FedM",
+    description: "Loves cocktails",
+    photo: "akjhhd",
+    email: "fed123@mistercocktail.com",
+    encrypted_password: '123456'
+  )
+
 # Seeding cocktails
 puts "=========Saving Cocktails=========="
 response = RestClient.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink')
 drinks = JSON.parse(response.body)['drinks']
 
 drinks.first(10).each do |drink|
-  id = drink['idDrink'].to_i
+  id = drink['idDrink']
   response = RestClient.get("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=#{id}")
-  drinks = JSON.parse(response)
+  drinks = JSON.parse(response.body)['drinks'][0]
 
-  Cocktail.create(name: drinks['strDrink'], description: drinks['strIBA'], photo: drinks['strDrinkThumb'])
+  Cocktail.create!(name: drinks['strDrink'], description: drinks['strIBA'], photo: drinks['strDrinkThumb'], user: User.first)
 end
 
 # Seeding Ingredients
