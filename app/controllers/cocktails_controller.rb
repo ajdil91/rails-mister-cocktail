@@ -1,5 +1,6 @@
 class CocktailsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
     @cocktails = policy_scope(Cocktail).order(created_at: :desc)
     if params[:query].present?
