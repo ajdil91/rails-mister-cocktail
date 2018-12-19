@@ -43,7 +43,7 @@ drinks.first(10).each do |drink|
   response = RestClient.get("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=#{id}")
   drinks = JSON.parse(response.body)['drinks'][0]
 
-  Cocktail.create!(name: drinks['strDrink'], description: drinks['strCategory'], photo: drinks['strDrinkThumb'], user: User.first)
+  Cocktail.create!(name: drinks['strDrink'], description: drinks['strCategory'], remote_photo_url: drinks['strDrinkThumb'], user: User.first)
 end
 
 # Seeding Ingredients
