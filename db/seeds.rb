@@ -48,6 +48,15 @@ end
 
 # Seeding Ingredients
 puts "========Saving Ingredients============"
+# API Ingredients
+response = RestClient.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+ingredients = JSON.parse(response.body)['drinks']
+
+ingredients.each do |ingredient|
+  Ingredient.create(name: ingredient['strIngredient1'])
+end
+
+# Custom Ingredients
 Ingredient.create(name: "lemon")
 Ingredient.create(name: "lime")
 Ingredient.create(name: "ice")
